@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import millify from 'millify'
 import { Link } from 'react-router-dom'
 import { useGetCryptosQuery } from '../services/cryptoApi'
@@ -11,7 +11,18 @@ const Cryptocurrencies = ({simplified}) => {
   
 
    const {data: cryptoList, isFetching} = useGetCryptosQuery(count)
-   const [cryptos, setCryptos ] = useState(cryptoList?.data?.coins)
+  //  const [cryptos, setCryptos ] = useState(cryptoList?.data?.coins)
+   const [cryptos, setCryptos ] = useState([])
+   const [searchTerm, setSerchTerm] = useState('')
+
+
+   useEffect(()=>{
+
+    const filterData = cryptoList?.data?.coins.filter((coins)=>
+      coins.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  setCryptos(filterData)  
+   },[cryptoList,searchTerm])
 
    console.log(cryptos);
   
@@ -20,7 +31,20 @@ const Cryptocurrencies = ({simplified}) => {
 
   return (
     <>
-    <div className='cryto-card-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 w-full'>
+    
+    {!simplified && (
+
+      <div className='flex justify-center mb-5 w-full'>
+        <input placeholder='Search cryptocurrency' 
+        onChange={(e)=>setSerchTerm(e.target.value)}
+        className='border border-gray-400 outline-0 rounded w-sm p-1'
+        />
+      </div>
+
+    )}
+      
+
+    <div className='cryto-card-container grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 w-full'>
       {cryptos?.map((currency)=>(
         <div className="crypto-card border p-4 rounded" key={currency.id}>
           <Link to={`/crypto/${currency.id}`}>
