@@ -63,7 +63,7 @@ const Homepage = () => {
       <Cryptocurrencies simplified />
 
       <div className="flex justify-between pr-10 mt-8 w-full">
-      <div className="text-2xl">Latest Crypto News</div>
+      <div className="text-2xl mb-3">Latest Crypto News</div>
       <div className="text-blue-600 text-lg"><Link to='/news'>Show More</Link></div>
       </div>
       <News simplified />

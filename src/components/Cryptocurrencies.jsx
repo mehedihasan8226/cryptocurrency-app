@@ -7,7 +7,7 @@ const Cryptocurrencies = ({simplified}) => {
 
   const count = simplified? 10: 100;
 
-  console.log(simplified);
+  // console.log(simplified);
   
 
    const {data: cryptoList, isFetching} = useGetCryptosQuery(count)
@@ -46,7 +46,7 @@ const Cryptocurrencies = ({simplified}) => {
 
     <div className='cryto-card-container grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-2 w-full'>
       {cryptos?.map((currency)=>(
-        <div className="crypto-card border p-4 rounded" key={currency.id}>
+        <div className="crypto-card bg-white shadow-2xl p-4 rounded-md" key={currency.id}>
           <Link to={`/crypto/${currency.id}`}>
               <div>
                 <div className='flex justify-between'>
