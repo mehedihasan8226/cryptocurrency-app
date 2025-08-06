@@ -40,7 +40,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const baseUrl = 'https://newsapi.org/v2';
 
 const newsApiHeaders = {
-  'X-Api-Key': '98bd4406272d4f4b92bff56b09338089' 
+  'X-Api-Key': import.meta.env.VITE_NEWS_API_KEY
 };
 
 const createRequest = (url) => ({ url, headers: newsApiHeaders });
